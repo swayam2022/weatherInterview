@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.swayam.project.interview.ui.weather.WeatherViewModel" />
+    </data>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="40dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tl_latitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_enter_latitude"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_latitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                />
+
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tl_longitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_enter_longitude"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:layout_constraintTop_toBottomOf="@+id/tl_latitude"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_longitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                />
+
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_get_weather_details"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:onClick="@{()->viewModel.onClickGetWeatherDetails()}"
+            app:layout_constraintTop_toBottomOf="@id/tl_longitude"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/label_get_weather_details"
+            />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_currently"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            android:clipToPadding="false"
+            app:layout_constraintTop_toBottomOf="@+id/btn_get_weather_details"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="30dp"
+            android:visibility="gone"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:paddingBottom="20dp"
+
+                >
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_divider_currently"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.45"
+                    />
+                <TextView
+                    android:id="@+id/tv_currently"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/AppTheme.Headline5"
+                    android:text="@string/label_currently"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_label_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_currently"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/label_date"
+                    style="@style/AppTheme.Headline6"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    />
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/gl_divider_currently"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_label_date"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_label_date"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_label_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/label_time"
+                    style="@style/AppTheme.Headline6"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/gl_divider_currently"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_label_time"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_label_time"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_label_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_time"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/label_temperature"
+                    style="@style/AppTheme.Headline6"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_temp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/gl_divider_currently"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_label_temp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_label_temp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_label_humidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_temp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/label_humidity"
+                    style="@style/AppTheme.Headline6"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_humidity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/gl_divider_currently"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_label_humidity"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_label_humidity"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_label_wind_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_humidity"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/label_wind_speed"
+                    style="@style/AppTheme.Headline6"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_wind_speed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/gl_divider_currently"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_label_wind_speed"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_label_wind_speed"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_hourly"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            android:clipToPadding="false"
+            app:layout_constraintTop_toBottomOf="@+id/cv_currently"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="30dp"
+            android:visibility="gone"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:paddingBottom="20dp"
+
+                >
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_divider_hourly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.45"
+                    />
+                <TextView
+                    android:id="@+id/tv_hourly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/AppTheme.Headline5"
+                    android:text="@string/label_currently"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_label_hourly_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_hourly"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/label_date"
+                    style="@style/AppTheme.Headline6"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    />
+                <TextView
+                    android:id="@+id/tv_hourly_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/gl_divider_hourly"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_label_hourly_date"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_label_hourly_date"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_label_hourly_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_hourly_date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/label_time"
+                    style="@style/AppTheme.Headline6"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_hourly_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/gl_divider_hourly"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_label_hourly_time"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_label_hourly_time"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_label_hourly_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_hourly_time"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/label_temperature"
+                    style="@style/AppTheme.Headline6"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_hourly_temp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/gl_divider_hourly"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_label_hourly_temp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_label_hourly_temp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_label_hourly_humidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_hourly_temp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/label_humidity"
+                    style="@style/AppTheme.Headline6"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_hourly_humidity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/gl_divider_hourly"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_label_hourly_humidity"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_label_hourly_humidity"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_label_hourly_wind_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_hourly_humidity"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/label_wind_speed"
+                    style="@style/AppTheme.Headline6"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_hourly_wind_speed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/gl_divider_hourly"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_label_hourly_wind_speed"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_label_hourly_wind_speed"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_daily"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            android:clipToPadding="false"
+            app:layout_constraintTop_toBottomOf="@+id/cv_hourly"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="30dp"
+            android:visibility="gone"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:paddingBottom="20dp"
+
+                >
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_divider_daily"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.45"
+                    />
+                <TextView
+                    android:id="@+id/tv_daily"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/AppTheme.Headline5"
+                    android:text="@string/label_daily"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_label_daily_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_daily"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/label_date"
+                    style="@style/AppTheme.Headline6"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    />
+                <TextView
+                    android:id="@+id/tv_daily_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/gl_divider_daily"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_label_daily_date"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_label_daily_date"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_label_daily_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_daily_date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/label_time"
+                    style="@style/AppTheme.Headline6"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_daily_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/gl_divider_daily"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_label_daily_time"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_label_daily_time"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_label_daily_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_daily_time"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/label_temperature"
+                    style="@style/AppTheme.Headline6"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_daily_temp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/gl_divider_daily"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_label_daily_temp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_label_daily_temp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_label_daily_humidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_daily_temp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/label_humidity"
+                    style="@style/AppTheme.Headline6"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_daily_humidity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/gl_divider_daily"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_label_daily_humidity"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_label_daily_humidity"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_label_daily_wind_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_daily_humidity"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/label_wind_speed"
+                    style="@style/AppTheme.Headline6"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_daily_wind_speed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/gl_divider_daily"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_label_daily_wind_speed"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_label_daily_wind_speed"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+</layout>
